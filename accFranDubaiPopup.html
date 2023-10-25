@@ -53,13 +53,13 @@
             color: #0B035E;
         }
 
-        #youtube-btn {
+        #submit-btn {
             position: absolute;
-            bottom: 35px;
-            left: 25px;
+            bottom: -50px;
+            left: 35px;
         }
 
-        #youtube-btn button {
+        #submit-btn {
             background-color: #0B035E;
             padding: 10px 20px;
             font-size: 22px;
@@ -69,8 +69,34 @@
             color: #ffffff;
         }
 
-        #youtube-btn button:hover {
+        #submit-btn:hover {
             background-color: rgb(242, 118, 56);
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            bottom: 75px;
+            left: 25px;
+            position: absolute;
+        }
+
+        .input-field {
+            border-radius: 5px;
+            width: 280px;
+            height: 25px;
+        }
+
+        #name-fields {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 18px;
+        }
+
+        .name-field {
+            border-radius: 5px;
+            width: 132px;
+            height: 25px;
         }
     </style>
 </head>
@@ -79,10 +105,15 @@
     <div id="overlay"></div>
     <div id="widget-container">
         <div id="close-btn">&#10006;</div>
-        <!-- Need to make a form to connect to Podio here -->
-        <!-- <a href="https://www.eventbrite.com/e/disruptx-uae-building-bridges-between-the-uk-eu-and-uae-markets-tickets-726129431677?aff=erelexpmlt" id="event-btn">
-            <button>Join our next event!</button>
-        </a> -->
+        <form id="contact-form">
+            <div id="name-fields">
+                <input type="text" class="name-field" name="first_name" placeholder="First Name*" required><br>
+                <input type="text" class="name-field" name="last_name" placeholder="Last Name*" required><br>
+            </div>
+            <input type="tel" class="input-field" name="phone_number" placeholder="Phone Number*" required><br>
+            <input type="email" class="input-field" name="email" placeholder="Email Address*" required><br>
+            <input type="submit" id="submit-btn" value="Subscribe now!">
+        </form>
     </div>
     <script>
         function closing() {
