@@ -44,7 +44,7 @@
             /* Higher z-index to appear above overlay */
         }
 
-        #close-btn {
+        #close-button {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -53,13 +53,13 @@
             color: #0B035E;
         }
 
-        #submit-btn {
+        #submit-button {
             position: absolute;
             bottom: -50px;
             left: 35px;
         }
 
-        #submit-btn {
+        #submit-button {
             background-color: #0B035E;
             padding: 10px 20px;
             font-size: 22px;
@@ -69,7 +69,7 @@
             color: #ffffff;
         }
 
-        #submit-btn:hover {
+        #submit-button:hover {
             background-color: rgb(242, 118, 56);
         }
 
@@ -104,7 +104,7 @@
 <body>
     <div id="overlay"></div>
     <div id="widget-container">
-        <div id="close-btn">&#10006;</div>
+        <div id="close-button">&#10006;</div>
         <form id="contact-form">
             <div id="name-fields">
                 <input type="text" class="name-field" name="first_name" placeholder="First Name*" required><br>
@@ -112,7 +112,7 @@
             </div>
             <input type="tel" class="input-field" name="phone_number" placeholder="Phone Number*" required><br>
             <input type="email" class="input-field" name="email" placeholder="Email Address*" required><br>
-            <input type="submit" id="submit-btn" value="Subscribe now!">
+            <input type="submit" id="submit-button" value="Subscribe now!">
         </form>
     </div>
     <script>
@@ -123,7 +123,7 @@
             overlay.style.display = 'none';
         }
 
-        document.getElementById('close-btn').addEventListener('click', closing);
+        document.getElementById('close-button').addEventListener('click', closing);
         document.getElementById('overlay').addEventListener('click', closing);
     </script>
 </body>
