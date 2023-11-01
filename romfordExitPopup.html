@@ -34,11 +34,11 @@
             position: relative;
             width: 600px;
             height: 600px;
-            background-image: url('https://static.wixstatic.com/media/888cc8_ef98e89692d0447ca39ca2c3d7fbdefb~mv2.png');
+            background-color: #0B035E;
             background-size: cover;
             background-repeat: no-repeat;
             border: 1px solid #ccc;
-            border-radius: 10px;
+            border-radius: 300px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             z-index: 10000;
             /* Higher z-index to appear above overlay */
@@ -51,16 +51,26 @@
             cursor: pointer;
             font-size: 30px;
             color: #0B035E;
+            transition: color 0.3s;
+
         }
 
         #submit-button {
             position: absolute;
-            bottom: -50px;
-            left: 35px;
+            bottom: -125px;
+            left: 120px;
+            width: 250px;
+            height: 75px;
+            font-size: 28px !important;
+        }
+
+        #close-button:hover {
+            color: rgb(242, 118, 56);
+            border: thick, solid, #0B035E;
         }
 
         #submit-button {
-            background-color: #0B035E;
+            background-color: rgb(242, 118, 56);
             padding: 10px 20px;
             font-size: 22px;
             border-radius: 20px;
@@ -68,9 +78,9 @@
             transition: background-color 0.3s;
             color: #ffffff;
         }
-
+        
         #submit-button:hover {
-            background-color: rgb(242, 118, 56);
+            background-color: #4c3cff;
         }
 
         #contact-form {
@@ -84,7 +94,8 @@
         .input-field {
             border-radius: 5px;
             width: 280px;
-            height: 25px;
+            padding: 10px;
+            height: 15px;
         }
 
         #name-fields {
@@ -95,8 +106,35 @@
 
         .name-field {
             border-radius: 5px;
-            width: 132px;
-            height: 25px;
+            width: 135px;
+            height: 35px;
+        }
+
+        /* Add this CSS to the existing code */
+
+        #title-text {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            translate: 0 -20%;
+        }
+
+        label[for="agree-checkbox"] {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            text-align: center;
+            width: 500px;
         }
     </style>
 </head>
@@ -106,14 +144,20 @@
     <div id="widget-container">
         <div id="close-button">&#10006;</div>
         <form id="contact-form">
+            <p id="title-text">Wait! Before you go, why not leave your contact details?</p>
             <div id="name-fields">
                 <input type="text" class="name-field" name="first_name" placeholder="First Name*" required><br>
                 <input type="text" class="name-field" name="last_name" placeholder="Last Name*" required><br>
             </div>
             <input type="tel" class="input-field" name="phone_number" placeholder="Phone Number*" required><br>
             <input type="email" class="input-field" name="email" placeholder="Email Address*" required><br>
+            <label for="agree-checkbox">
+                <input type="checkbox" id="agree-checkbox" name="agree" required>
+                I agree to allow Romford Start-Up Hub to contact me
+            </label><br>
             <input type="submit" id="submit-button" value="Subscribe now!">
         </form>
+
     </div>
     <script>
         function closing() {
