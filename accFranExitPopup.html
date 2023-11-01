@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Widget</title>
+    <style>
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            /* Make the body relative to position the overlay */
+        }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent overlay */
+            z-index: 9999;
+            /* Higher z-index to cover everything */
+        }
+
+        #widget-container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-color: #0B035E;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: 1px solid #ccc;
+            border-radius: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 10000;
+            /* Higher z-index to appear above overlay */
+        }
+
+        #close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 30px;
+            color: #0B035E;
+            transition: color 0.3s;
+
+        }
+
+        #submit-button {
+            position: absolute;
+            bottom: -125px;
+            left: 120px;
+            width: 250px;
+            height: 75px;
+            font-size: 28px !important;
+        }
+
+        #close-button:hover {
+            color: rgb(242, 118, 56);
+            border: thick, solid, #0B035E;
+        }
+
+        #submit-button {
+            background-color: rgb(242, 118, 56);
+            padding: 10px 20px;
+            font-size: 22px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #ffffff;
+        }
+        
+        #submit-button:hover {
+            background-color: #4c3cff;
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            bottom: 75px;
+            left: 25px;
+            position: absolute;
+        }
+
+        .input-field {
+            border-radius: 5px;
+            width: 280px;
+            padding: 10px;
+            height: 15px;
+        }
+
+        #name-fields {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 18px;
+        }
+
+        .name-field {
+            border-radius: 5px;
+            width: 135px;
+            height: 35px;
+        }
+
+        /* Add this CSS to the existing code */
+
+        #title-text {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            translate: 0 -20%;
+        }
+
+        label[for="agree-checkbox"] {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            text-align: center;
+            width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay"></div>
+    <div id="widget-container">
+        <div id="close-button">&#10006;</div>
+        <form id="contact-form">
+            <p id="title-text">Wait! Before you go, why not leave your contact details?</p>
+            <div id="name-fields">
+                <input type="text" class="name-field" name="first_name" placeholder="First Name*" required><br>
+                <input type="text" class="name-field" name="last_name" placeholder="Last Name*" required><br>
+            </div>
+            <input type="tel" class="input-field" name="phone_number" placeholder="Phone Number*" required><br>
+            <input type="email" class="input-field" name="email" placeholder="Email Address*" required><br>
+            <label for="agree-checkbox">
+                <input type="checkbox" id="agree-checkbox" name="agree" required>
+                I agree to allow The Accountancy Franchise to contact me
+            </label><br>
+            <input type="submit" id="submit-button" value="Subscribe now!">
+        </form>
+
+    </div>
+    <script>
+        function closing() {
+            var widget = document.getElementById('widget-container');
+            var overlay = document.getElementById('overlay');
+            widget.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        document.getElementById('close-button').addEventListener('click', closing);
+        document.getElementById('overlay').addEventListener('click', closing);
+    </script>
+</body>
+
+</html>
