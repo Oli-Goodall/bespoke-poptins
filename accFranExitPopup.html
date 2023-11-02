@@ -136,6 +136,18 @@
             text-align: center;
             width: 500px;
         }
+
+        #thank-you-message {
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            font-size: 40px;
+            bottom: 230px;
+            left: 75px;
+            position: absolute;
+            width: 450px;
+            display: none;
+        }
     </style>
 </head>
 
@@ -157,9 +169,18 @@
             </label><br>
             <input type="submit" id="submit-button" value="Subscribe now!">
         </form>
-
+        <div id="thank-you-message">
+            <p>Thank you for submitting your details!</p>
+        </div>
     </div>
     <script>
+        function showThankYouMessage() {
+            let contactForm = document.getElementById('contact-form');
+            let thankYouMessage = document.getElementById('thank-you-message');
+            contactForm.style.display = 'none';
+            thankYouMessage.style.display = 'block';
+        }
+
         function getAccessToken() {
             return new Promise((resolve, reject) => {
                 let authenticationParams = {
@@ -246,6 +267,7 @@
 
                 xhr.onload = function () {
                     if (xhr.status >= 200 && xhr.status < 400) {
+                        showThankYouMessage();
                         console.log('Item created successfully:', xhr.responseText);
                     } else {
                         console.error('Error creating item:', xhr.status, xhr.statusText);
