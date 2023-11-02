@@ -160,15 +160,112 @@
 
     </div>
     <script>
+        function getAccessToken() {
+            return new Promise((resolve, reject) => {
+                let authenticationParams = {
+                    "grant_type": "app",
+                    "app_id": "25327320",
+                    "app_token": "fface635898a415b93f7874484e91bc8",
+                    "client_id": "olis-podio-app",
+                    "client_secret": "BPuU6ZWR8uQP3HFMrU9HjfO1eEaChtJnDxoYosDEi8htMxakvzeVahCDnxzoXdm3"
+                };
+
+                let xhr = new XMLHttpRequest();
+
+                xhr.open('POST', 'https://api.podio.com/oauth/token/v2', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        let response = JSON.parse(xhr.responseText);
+                        let accessToken = response.access_token;
+                        console.log('Access Token:', accessToken);
+                        resolve(accessToken);
+                    } else {
+                        console.error('Error getting access token:', xhr.status, xhr.statusText);
+                        reject(xhr.statusText);
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.error('Network error');
+                    reject('Network error');
+                };
+
+                xhr.send(JSON.stringify(authenticationParams));
+            });
+        }
+
         function closing() {
-            var widget = document.getElementById('widget-container');
-            var overlay = document.getElementById('overlay');
+            let widget = document.getElementById('widget-container');
+            let overlay = document.getElementById('overlay');
             widget.style.display = 'none';
             overlay.style.display = 'none';
         }
 
         document.getElementById('close-button').addEventListener('click', closing);
         document.getElementById('overlay').addEventListener('click', closing);
+
+        document.getElementById('contact-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            getAccessToken().then((currentAccessToken) => {
+                console.log('Access Token:', currentAccessToken);
+
+                let firstName = document.querySelector('[name="first_name"]').value;
+                let lastName = document.querySelector('[name="last_name"]').value;
+                let phoneNumber = document.querySelector('[name="phone_number"]').value;
+                let emailAddress = document.querySelector('[name="email"]').value;
+
+                let payload = {
+                    "fields": {
+                        "lead-contact": firstName,
+                        "last-name-3": lastName,
+                        "lead-category": 16,
+                        "lead-phone": [{ "type": "other", "value": phoneNumber }],
+                        "lead-email": [{ "type": "other", "value": emailAddress }],
+                        "ready-to-proceed-as-a-prospect": 3,
+                    }
+                };
+
+                let options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'OAuth2 ' + currentAccessToken
+                    },
+                    body: JSON.stringify(payload)
+                };
+
+                let xhr = new XMLHttpRequest();
+
+                xhr.open(options.method, 'https://api.podio.com/item/app/25327320/', true);
+                for (let header in options.headers) {
+                    xhr.setRequestHeader(header, options.headers[header]);
+                }
+
+                xhr.onload = function () {
+                    if (xhr.status >= 200 && xhr.status < 400) {
+                        console.log('Item created successfully:', xhr.responseText);
+                    } else {
+                        console.error('Error creating item:', xhr.status, xhr.statusText);
+                    }
+                };
+
+                xhr.onerror = function () {
+                    console.error('Network error');
+                };
+
+                console.log('Request Method:', options.method);
+                console.log('Request URL:', 'https://api.podio.com/item/app/25327320/');
+                console.log('Request Headers:', options.headers);
+                console.log('Request Body:', options.body);
+
+                xhr.send(options.body);
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
+        });
     </script>
 </body>
 
